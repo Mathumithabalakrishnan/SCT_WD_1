@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Responsive Landing Page</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      color: #fff;
+    }
+
+    header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      padding: 20px 50px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: transparent;
+      transition: background 0.3s ease, box-shadow 0.3s ease;
+      z-index: 999;
+    }
+
+    header.scrolled {
+      background: rgba(0, 0, 0, 0.9);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+    }
+
+    .logo {
+      font-size: 1.6rem;
+      font-weight: bold;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 30px;
+    }
+
+    nav ul li a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: 500;
+      padding: 8px 12px;
+      border-radius: 5px;
+      transition: background 0.3s ease, color 0.3s ease;
+    }
+
+    nav ul li a:hover,
+    nav ul li a.active {
+      background-color: #00bcd4;
+      color: #000;
+    }
+
+    section {
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 120px 20px 60px;
+      text-align: center;
+      background-size: cover;
+      background-position: center;
+    }
+
+    .overlay {
+      background: rgba(0, 0, 0, 0.6);
+      padding: 40px;
+      border-radius: 12px;
+      max-width: 800px;
+    }
+
+    .home {
+      background-image: url('https://images.unsplash.com/photo-1506765515384-028b60a970df');
+    }
+
+    .about {
+      background-image: url('https://images.unsplash.com/photo-1521737604893-d14cc237f11d');
+    }
+
+    .contact {
+      background-image: url('https://images.unsplash.com/photo-1542744173-8e7e53415bb0');
+    }
+
+    h1, h2 {
+      margin-bottom: 20px;
+    }
+
+    p {
+      font-size: 1.1rem;
+      line-height: 1.6;
+    }
+
+    @media (max-width: 768px) {
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 15px 30px;
+      }
+
+      nav ul {
+        flex-direction: column;
+        gap: 10px;
+        margin-top: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header id="navbar">
+    <div class="logo">MyWebsite</div>
+    <nav>
+      <ul>
+        <li><a href="#home" class="nav-link active">Home</a></li>
+        <li><a href="#about" class="nav-link">About</a></li>
+        <li><a href="#contact" class="nav-link">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section id="home" class="home">
+    <div class="overlay">
+      <h1>Welcome to My Website</h1>
+      <p>Delivering beautiful, fast and user-friendly web experiences.</p>
+    </div>
+  </section>
+
+  <section id="about" class="about">
+    <div class="overlay">
+      <h2>About Me</h2>
+      <p>I’m a passionate web developer focused on building modern, accessible, and interactive websites. Always exploring the intersection of creativity and functionality.</p>
+    </div>
+  </section>
+
+  <section id="contact" class="contact">
+    <div class="overlay">
+      <h2>Contact</h2>
+      <p>Email: <strong>your@email.com</strong><br>
+      LinkedIn: <a href="https://linkedin.com" target="_blank" style="color: #00bcd4;">Visit Profile</a></p>
+    </div>
+  </section>
+
+  <script>
+    const navbar = document.getElementById('navbar');
+    const links = document.querySelectorAll('.nav-link');
+
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 50);
+
+      links.forEach(link => {
+        const section = document.querySelector(link.getAttribute('href'));
+        if (
+          section.offsetTop <= window.scrollY + 100 &&
+          section.offsetTop + section.offsetHeight > window.scrollY + 100
+        ) {
+          links.forEach(l => l.classList.remove('active'));
+          link.classList.add('active');
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>
